@@ -1,0 +1,14 @@
+build
+dist
+__pycache__
+.DS_Store
+.idea
+target
+.github
+whisper_transcriptions
+transcriber_jar/src/main/resources/releases
+whisper/docs/mac/logs
+whisper/docs/ubuntu/logs
+whisper/docs/win/logs
+transcriber_jar/src/test/resources/videos
+whisper/videos

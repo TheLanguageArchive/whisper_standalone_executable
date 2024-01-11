@@ -1,0 +1,9 @@
+numba==0.58.1
+numpy==1.26.2
+torch==2.1.2
+tqdm==4.66.1
+more-itertools==10.1.0
+tiktoken==0.5.2
+ffmpeg
+ffmpeg-python==0.2.0
+PyInstaller==6.3.0
