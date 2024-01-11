@@ -1,0 +1,7 @@
+version: '3'
+services:
+  transcriber_cli_builder_service:
+    build: .
+    container_name: ubuntu20exec_builder_container/transcriber
+    volumes:
+      - /Users/hafreh/work/docker_containers_data:/data
