@@ -32,9 +32,10 @@ public class ExecutableUnitTest {
                 Optional.empty(),
                 Optional.of(JSON),
                 Optional.empty(),
+                Optional.of(Boolean.TRUE),
                 new URI("./target/"),
                 Optional.of(" --fp16=False ")
-        ), "src/test/resources/testFile202312061352Expected_ubuntu.json");
+        ), "src/test/resources/videos/testFile202312061352Expected_ubuntu.json");
     }
 
     @Test
@@ -48,9 +49,10 @@ public class ExecutableUnitTest {
                 Optional.empty(),
                 Optional.of(JSON),
                 Optional.empty(),
+                Optional.of(Boolean.TRUE),
                 new URI("./target/"),
                 Optional.of(" --fp16=False ")
-        ), "src/test/resources/testFile202312061352Expected_mac.json");
+        ), "src/test/resources/videos/testFile202312061352Expected_mac.json");
     }
 
     @Test
@@ -64,9 +66,10 @@ public class ExecutableUnitTest {
                 Optional.empty(),
                 Optional.of(JSON),
                 Optional.empty(),
+                Optional.of(Boolean.TRUE),
                 new URI("target/"),
                 Optional.of(" --fp16=False ")
-        ), "src/test/resources/testFile202312061352Expected_win.json");
+        ), "src/test/resources/videos/testFile202312061352Expected_win.json");
     }
 
     private void checkTranscriptionResults(WhisperArguments whisperArgs, String expectedResultsFilePath) throws IOException, InterruptedException {

@@ -28,10 +28,29 @@ public class CommandCreator {
         optionalAdd(command, "prompt", whisperArguments.prompt());
         optionalAdd(command, "output_format", whisperArguments.responseFormat());
         optionalAdd(command, "temperature", whisperArguments.temperature());
+        optionalAdd(command, "word_timestamps", toPythonBooleanString(whisperArguments.wordTimestamps()));
 
         add(command, "output_dir", whisperArguments.outputDirectory());
 
         return command.toArray(new String[0]);
+    }
+
+    /**
+     * Use this function to convert the string to correct capitalization case. Java stringifies the boolean values in small letters. Python has first letter capital for boolean literals.
+     * Java : true & false
+     * Python : True & False
+     *
+     * @param maybeBool is optionally available param with boolean literals.
+     *
+     * @return python acceptable capitalized stringified value of boolean literals.
+     */
+    private Optional<String> toPythonBooleanString(Optional<Boolean> maybeBool) {
+        Optional<String> maybeString = Optional.empty();
+        if (maybeBool.isPresent()) {
+            String boolString = maybeBool.get().toString();
+            maybeString = Optional.of(Character.toString(boolString.charAt(0)).toUpperCase().concat(boolString.substring(1)));
+        }
+        return maybeString;
     }
 
     public <T> List<String> add(List<String> command, String key, T value) {

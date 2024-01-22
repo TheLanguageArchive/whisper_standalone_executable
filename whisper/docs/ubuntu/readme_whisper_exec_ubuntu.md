@@ -73,7 +73,7 @@ rm transcriber_cli_ubuntu_001202312211131.spec
 From `whisper` project root folder.
 
 ```
-python cli.py ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+python cli.py ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 ## Packaging for Release(deliverable):
@@ -110,13 +110,13 @@ pyinstaller --clean --log-level=DEBUG transcriber_cli_ubuntu_001202312211131.spe
 For testing from the project root directory `transcriber_cli` execute the following command:
 
 ```
-"dist/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+"dist/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 ## Distribution
 
 ```
-cp "./dist/transcriber_cli_ubuntu_001202312211131" "./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" 
+cp "./dist/transcriber_cli_ubuntu_001202312211131" "./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131"
 ```
 
 ```
@@ -125,7 +125,7 @@ conda deactivate
 
 In `whisper` directory
 ```
-"./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+"./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 Transcription files will be created.

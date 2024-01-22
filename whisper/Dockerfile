@@ -84,7 +84,8 @@ RUN "/root/whisper/dist/transcriber_cli_ubuntu_${CLI_VER}" \
   --model=tiny \
   --language=en \
   --output_format=json \
-  --output_dir=./whisper_transcriptions/
+  --output_dir=./whisper_transcriptions/ \
+  --word_timestamps=True
 
 ## Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog

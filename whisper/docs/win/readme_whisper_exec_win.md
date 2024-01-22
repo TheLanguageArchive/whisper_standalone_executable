@@ -40,7 +40,7 @@ Remove-Item -Recurse -Force .\build `
 From `whisper` project root folder.
 
 ```
-python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/
+python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 ## Packaging for Release(deliverable):
@@ -76,7 +76,7 @@ pyinstaller --clean --log-level=DEBUG transcriber_cli_win_001202401021637.spec
 For testing from the project root directory `transcriber_cli` execute the following command:
 
 ```
-&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/'
+&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'
 ```
 
 ## Distribution
@@ -91,7 +91,7 @@ conda deactivate
 
 In `whisper` directory
 ```
-&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/'
+&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'
 ```
 
 Transcription files will be created.
