@@ -19,9 +19,9 @@ ARG CLI_VER=$CLI_SEM_VER$CLI_TIM_VER
 
 ARG PY_ENV_NAME="py_env_$CLI_VER"
 
-ARG INITIAL="_init"
+#ARG INITIAL="_init"
 
-ARG FINAL="_final"
+#ARG FINAL="_final"
 
 ARG HUMAN_READABLE_VERSION="$CLI_VER_MAJ.$CLI_VER_MIN.$CLI_VER_PAT $CLI_TIM_VER"
 
@@ -48,11 +48,11 @@ RUN mv ./videos ./../
 
 RUN echo $HUMAN_READABLE_VERSION > v.txt
 
-RUN mkdir -p docs/ubuntu/logs/
+#RUN mkdir -p docs/ubuntu/logs/
 
 SHELL ["conda", "run", "/bin/bash", "-i", "-c"]
 
-RUN conda list > docs/ubuntu/logs/py_env_base.txt
+#RUN conda list > docs/ubuntu/logs/py_env_base.txt
 
 RUN conda create \
     --name $PY_ENV_NAME \
@@ -61,13 +61,13 @@ RUN conda create \
 
 SHELL ["conda", "run", "-n", "py_env_001202401161123", "/bin/bash", "-c"]
 
-RUN conda list > docs/ubuntu/logs/$PY_ENV_NAME$INITIAL.txt
+#RUN conda list > docs/ubuntu/logs/$PY_ENV_NAME$INITIAL.txt
 
 RUN pip install -r requirements.txt
 
 RUN conda install -c conda-forge  ffmpeg=6.1.0 --yes
 
-RUN conda list > docs/ubuntu/logs/$PY_ENV_NAME$FINAL.txt
+#RUN conda list > docs/ubuntu/logs/$PY_ENV_NAME$FINAL.txt
 
 RUN pyinstaller cli.py \
   --onefile \
@@ -77,15 +77,15 @@ RUN pyinstaller cli.py \
   --add-binary /root/miniconda3/envs/${PY_ENV_NAME}/bin/ffprobe:bin \
   --add-binary /root/miniconda3/envs/${PY_ENV_NAME}/lib/libstdc++.so.6:.
 
-# Optional command. This tests the created exectuable. It needs the video file.
-RUN "/root/whisper/dist/transcriber_cli_ubuntu_${CLI_VER}" \
-  /root/videos/testFile202312061352.mp4 \
-  --fp16=False \
-  --model=tiny \
-  --language=en \
-  --output_format=json \
-  --output_dir=./whisper_transcriptions/ \
-  --word_timestamps=True
+# Optional command. This tests the created executable. It needs the video file.
+#RUN "/root/whisper/dist/transcriber_cli_ubuntu_${CLI_VER}" \
+#  /root/videos/testFile202312061352.mp4 \
+#  --fp16=False \
+#  --model=tiny \
+#  --language=en \
+#  --output_format=json \
+#  --output_dir=./whisper_transcriptions/ \
+#  --word_timestamps=True
 
 ## Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
