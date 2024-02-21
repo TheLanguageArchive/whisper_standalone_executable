@@ -40,7 +40,7 @@ Remove-Item -Recurse -Force .\build `
 From `whisper` project root folder.
 
 ```
-python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
+python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 ## Packaging for Release(deliverable):
@@ -76,7 +76,7 @@ pyinstaller --clean --log-level=DEBUG transcriber_cli_win_001202401021637.spec
 For testing from the project root directory `transcriber_cli` execute the following command:
 
 ```
-&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'
+&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True' python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 ## Distribution
@@ -91,7 +91,7 @@ conda deactivate
 
 In `whisper` directory
 ```
-&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'
+&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 Transcription files will be created.
@@ -100,4 +100,5 @@ Transcription files will be created.
 
 ## Potentially useful info
 
-Cache location: `~/.cache/whisper/`
+Default Cache location: `~/.cache/whisper/`
+Configured Cache Location: ~/AppData/Local/.cache/whisper
