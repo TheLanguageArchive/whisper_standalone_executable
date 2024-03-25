@@ -11,20 +11,20 @@
 
 ## Dev Guide | Way to work with it:
 
-- Clone it.
+- Clone it. `git clone git@github.com:TheLanguageArchive/whisper_standalone_executable.git --depth 1`
+- `cd whisper_standalone_executable/whisper`
 - `conda update conda`
-- `conda list > docs/transcriber_cli_env_win_base202401021322.txt`
+- `mkdir -p docs/win/logs/ ; conda list > docs/win/logs/transcriber_cli_env_win_base202401021322.txt`
 
 - Create Anaconda (Conda) Environment : `transcriber_cli_env_win_202312211128`
-- `conda create --name transcriber_cli_env_win_202312211128 python=3.11.5`
+- `conda create --name transcriber_cli_env_win_202312211128 python=3.11.5 -y`
 - Select the created Python Environment in the `PyCharm` / `Visual Studio Code` / `Terminal`
   - `conda activate transcriber_cli_env_win_202312211128`
-- `conda list > docs/transcriber_cli_env_win_base202401021322_init.txt`
+- `mkdir -p docs/win/logs/ ; conda list > docs/win/logs/transcriber_cli_env_win_base202401021322_init.txt`
 - Install Pre-req Dependencies:
   - `pip install -r requirements.txt`
-  - `conda install -c conda-forge ffmpeg=6.1.0`
-- `cd <workspace>/whisper_standalone_executable/whisper`
-- `conda list > docs/transcriber_cli_env_win_base202401021322_final.txt`
+  - `conda install -c conda-forge ffmpeg=6.1.0 -y`
+- `mkdir -p docs/win/logs/ ; conda list > docs/win/logs/transcriber_cli_env_win_base202401021322_final.txt`
 
 ## Clean
 
@@ -40,7 +40,7 @@ Remove-Item -Recurse -Force .\build `
 From `whisper` project root folder.
 
 ```
-python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/
+python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 ## Packaging for Release(deliverable):
@@ -76,7 +76,7 @@ pyinstaller --clean --log-level=DEBUG transcriber_cli_win_001202401021637.spec
 For testing from the project root directory `transcriber_cli` execute the following command:
 
 ```
-&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/'
+&"dist/transcriber_cli_win_001202401021637.exe" "../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True' python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 ## Distribution
@@ -89,9 +89,9 @@ cp "./dist/transcriber_cli_win_001202401021637.exe" "./../transcriber_jar/src/ma
 conda deactivate
 ```
 
-In `whisper_standalone_executable`
+In `whisper` directory
 ```
-&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/'
+&"./../transcriber_jar/src/main/resources/releases/transcriber_cli_win_001202401021637" "./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4" '--fp16=False' '--model=large-v3' '--language=en' '--output_format=json' '--output_dir=./whisper_transcriptions/' '--word_timestamps=True'python cli.py ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=large-v3 --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True  --model_dir ~/AppData/Local/.cache/whisper
 ```
 
 Transcription files will be created.
@@ -100,4 +100,5 @@ Transcription files will be created.
 
 ## Potentially useful info
 
-Cache location: `~/.cache/whisper/`
+Default Cache location: `~/.cache/whisper/`
+Configured Cache Location: ~/AppData/Local/.cache/whisper

@@ -7,7 +7,7 @@ This is a mono repo style project.
 ## Projects 
 
 ### Whisper CLI ( [Readme](whisper/readme_whisper_exec.md) )
-- It is "Modified" OpenAi's whisper python project to create an executable files using PyInstaller. 
+- It is "Modified" OpenAi's whisper python project to create executable files using PyInstaller. 
 - "Standalone Executable" should be usable by just copying to the target system; without requiring python environment setup.
 - The created executables are platform dependant.
 

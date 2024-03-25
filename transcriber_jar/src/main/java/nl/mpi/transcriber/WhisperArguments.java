@@ -11,6 +11,7 @@ public record WhisperArguments(
         Optional<String> prompt,
         Optional<WhisperResponseFormats> responseFormat,
         Optional<String> temperature,
+        Optional<Boolean> wordTimestamps,
         URI outputDirectory,
         Optional<String> misc
 ) {

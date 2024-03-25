@@ -1,8 +1,8 @@
 
-# OpenAi's Whisper   as   Standalone Ubuntu 20.04 CLI
+# OpenAi's Whisper   as   Standalone Ubuntu 20.04 CLI (VMWare)
 
 ## Compatibility:
-- Platform: 
+- Platform: Ubuntu 20.04
 - Python 3.11.5
 - pip 23.3.1
 - setuptools 68.2.2
@@ -49,14 +49,13 @@ The OS that runs the whisper script needs to have at least 8 GB RAM available fo
 - `cd whisper_standalone_executable/whisper/`
 - Create Anaconda (Conda) Environment : `transcriber_cli_env202401101448` (Intellij Idea Community > File > Settings > Project : Whisper > Add Interpreter > Conda > Create `transcriber_cli_env202401101448`)
 - `conda list > docs/ubuntu/logs/transcriber_cli_env_ubuntu_base.txt`
-- `conda create --name transcriber_cli_env202401101448 python=3.11.5`
+- `conda create --name transcriber_cli_env202401101448 python=3.11.5 -y`
 - Select the created Python Environment in the `PyCharm` / `Visual Studio Code` / `Terminal`
 - `conda activate transcriber_cli_env202401101448`
 - `conda list > docs/ubuntu/logs/transcriber_cli_env_ubuntu_202401101448_init.txt`
 - Install Pre-req Dependencies:
   - `pip install -r requirements.txt`
-  - `conda install -c conda-forge ffmpeg=6.1.0`
-- `cd <workspace>/whisper_standalone_executable/whisper`
+  - `conda install -c conda-forge ffmpeg=6.1.0 -y`
 - `conda list > docs/ubuntu/logs/transcriber_cli_env_ubuntu_202401101448_final.txt`
 
 
@@ -74,7 +73,7 @@ rm transcriber_cli_ubuntu_001202312211131.spec
 From `whisper` project root folder.
 
 ```
-python cli.py ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+python cli.py ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 ## Packaging for Release(deliverable):
@@ -111,22 +110,22 @@ pyinstaller --clean --log-level=DEBUG transcriber_cli_ubuntu_001202312211131.spe
 For testing from the project root directory `transcriber_cli` execute the following command:
 
 ```
-"dist/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+"dist/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 ## Distribution
 
 ```
-cp "./dist/transcriber_cli_ubuntu_001202312211131" "./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" 
+cp "./dist/transcriber_cli_ubuntu_001202312211131" "./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131"
 ```
 
 ```
 conda deactivate
 ```
 
-In `whisper_standalone_executable`
+In `whisper` directory
 ```
-"./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/
+"./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202312211131" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
 
 Transcription files will be created.

@@ -1,55 +1,51 @@
 
 # OpenAi's Whisper   as   Standalone Ubuntu 20.04 CLI (Docker)
 
+#### Compatibility:
+- Platform: Ubuntu 20.04
+- Python 3.11.5
+- pip 23.3.1
+- setuptools 68.2.2
+- ffmpeg 6.1.0
+
+## Dev Guide | Way to work with it:
+
 In "workspace"
 
-```
+```shell
 git clone git@github.com:TheLanguageArchive/whisper_standalone_executable.git --depth 1
 ```
-#### (Optional) Add the test file to container
 
-This step is optional and should be done when one requires debugging the container. Whether the exe created inside the container can work within same environment or not.
-
-`cd ./whisper_standalone_executable/whisper/`
-
-`ln -v ../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 ./videos/testFile202312061352.mp4`
-
-#### Build Docker Image
-
-```
-docker build -t ubuntu20exec_builder_image/transcriber:latest .
+```shell
+cd whisper_standalone_executable/whisper
 ```
 
-(Optional) Rename image if required :
-```
-docker image tag 7ab1164eaa98 ubuntu20exec_builder_image/transcriber:latest
-```
-
-#### Run executable
-
-Running container and use container's bash
-
-```commandline
-docker run -it --name ubuntu20exec_builder_container ubuntu20exec_builder_image/transcriber:latest
+```shell
+cp -r ./../../videos .
 ```
 
-Run the created executable:
+Build Docker Image
 
-```
-  "/root/whisper/dist/transcriber_cli_ubuntu_001202312211131" \
-    ./videos/testFile202312061352.mp4 \
-    --fp16=False \
-    --model=tiny \
-    --language=en \
-    --output_format=json \
-    --output_dir=./whisper_transcriptions/
+```shell
+docker build -t ubuntu20exec_builder_image:latest .
 ```
 
-#### Copy out
-
-Getting the executable out of the container to the host system
-
-From outside container:
+Run container (perhaps to debug or check the created executable)
+```shell
+docker run -it --name ubuntu20exec_builder_container ubuntu20exec_builder_image:latest
 ```
-docker cp ubuntu20exec_builder_container:/root/whisper/dist/transcriber_cli_ubuntu_001202312211131 ./../transcriber_jar/src/main/resources/releases
+
+Close container's terminal/shell
+```shell
+exit
+```
+
+Now from outside container:
+```shell
+docker cp ubuntu20exec_builder_container:/root/whisper/dist/transcriber_cli_ubuntu_001202401161123 ./../transcriber_jar/src/main/resources/releases
+```
+
+In `whisper` directory
+```shell
+"./../transcriber_jar/src/main/resources/releases/transcriber_cli_ubuntu_001202401161123" ./../transcriber_jar/src/test/resources/videos/testFile202312061352.mp4 --fp16=False --model=tiny --language=en --output_format=json --output_dir=./whisper_transcriptions/ --word_timestamps=True
 ```
